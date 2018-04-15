@@ -1,11 +1,11 @@
 package linkedlist;
 
-public class Node {
+public class Node<T> {
 
-	String data;
+	T data;
 	Node next;
 	
-	public Node(String data) {
+	public Node(T data) {
 		this.data = data;
 	}
 }
