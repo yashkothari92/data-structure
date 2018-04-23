@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 public class RunLinkedList {
 
 	public static void main(String[] args) {
-		LinkedListOp cont = new LinkedListOp();
+		LinkedListOp<String> cont = new LinkedListOp<String>();
 		//Generate random numbers
 		/*Random random = new Random();
 		
@@ -40,7 +40,7 @@ public class RunLinkedList {
 		cont.insertNodeToPos("Brazil", 1);*/
 		cont.traverse();
 		System.out.println("\nReversubg kust,,,");
-		Node head = cont.returnHead();
+		Node<String> head = cont.returnHead();
 		System.out.print("\nForward recursion");
 		cont.printRecursionForward(cont.returnHead());
 		System.out.print("\nReverse recursion");

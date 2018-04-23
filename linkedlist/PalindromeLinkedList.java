@@ -20,7 +20,7 @@ public class PalindromeLinkedList {
 	public static void main(String[] args) {
 		LinkedListOp<Integer> cont = new LinkedListOp<Integer>();
 		cont.insertNode(1);
-		cont.insertNode(4);
+		cont.insertNode(3);
 		cont.insertNode(2);
 		cont.insertNode(3);
 		cont.insertNode(1);
@@ -51,6 +51,7 @@ public class PalindromeLinkedList {
 			if (!stack.pop().equals(slow.data)){
 				return false;
 			}
+			slow = slow.next;
 		}
 		return true;
 	}
