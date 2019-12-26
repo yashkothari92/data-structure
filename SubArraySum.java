@@ -20,7 +20,7 @@ public class SubArraySum {
 		}
 	}
 	
-	private static boolean subarraySum(int[] arr) {
+	private static boolean isSumOfSubArrayZeroExist(int[] arr) {
 		HashMap<Integer, Integer> hm = new HashMap<>();
 		//HashSet<Integer> set = new HashSet<>();
 		int sum = 0;
@@ -41,7 +41,7 @@ public class SubArraySum {
 
 	public static void main(String[] args) {
 		int arr[] = {1, -1, 2, -1, 4};
-		boolean result = subarraySum(arr);
+		boolean result = isSumOfSubArrayZeroExist(arr);
 		//printSubArray(3);
 		System.out.println(result);
 	}
