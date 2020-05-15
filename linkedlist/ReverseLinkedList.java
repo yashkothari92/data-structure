@@ -7,7 +7,7 @@ public class ReverseLinkedList {
 		Node<?> current = head;
 		Node<?> next;
 		
-		while(current != head){
+		while(current != null){
 			next = current.next;
 			current.next = (Node<?>) prev;
 			prev = current;
