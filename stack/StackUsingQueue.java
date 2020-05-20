@@ -28,25 +28,41 @@ public class StackUsingQueue {
 		System.out.println(de11);
 	}
 
-	private void push(int i) {
-		q1.add(i);
-	}
+	    
+    /** Push element x onto stack. */
+    public void push(int x) {
+        q1.add(x);
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        // put everything to Q2 but leave the last one and return it	
+        while(q1.size()!=1) {
+            q2.add(q1.poll());
+        }
 	
-	private int pop() {
-		// put everything to Q2 but leave the last one and return it
-		if (q2.isEmpty()) {
-			while(q1.size()!=1) {
-				q2.add(q1.poll());
-			}
-		}
-		
-		int res = q1.poll();
-		
-		// swap Q1 & Q2
-		Queue<Integer> temp = q1;
-		q1 = q2;
-		q2 = temp;
-		
-		return res;
+	int res = q1.poll();
+
+	// swap Q1 & Q2
+	Queue<Integer> temp = q1;
+	q1 = q2;
+	q2 = temp;
+
+	return res;
+    }
+    
+    /** Get the top element.. */
+    public int top() {
+        while(q1.size()>1) {
+            q2.add(q1.poll());
 	}
+	int res = q1.peek();	
+	return res;
+    }
+    
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return (q1.isEmpty() && q2.isEmpty());
+    }
 }
+
