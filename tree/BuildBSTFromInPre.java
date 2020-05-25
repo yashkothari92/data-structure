@@ -2,60 +2,53 @@ package tree;
 
 public class BuildBSTFromInPre {
 
-	public static int preIdx = 0;
-	
+	int preIdx = 0;
+
 	public static void main(String[] args) {
-		
-		BuildBSTFromInPre bst_in_pre = new BuildBSTFromInPre();
-		
-		int[] pre = {11, 8, 4, 9, 21, 13, 30, 36};
-		int[] in = {4, 8, 9,11, 13, 21, 30, 36};
-		
-		int in_length = in.length; 
-		
-		BSTNode root = bst_in_pre.buildBST(pre, in, 0, in_length-1);	
-		System.out.println("-----\n");
-		bst_in_pre.inOrderTraversal(root);
+		BuildBSTFromInPre obj = new BuildBSTFromInPre();
+
+		int[] pre = { 1, 2 }; // {3,9,20,15,7};
+		int[] in = { 2, 1 }; // {9,3,15,20,7};
+
+		TreeNode root = obj.buildTree(pre, in);
+		System.out.println(root);
 	}
 
-	private BSTNode<Integer> buildBST(int[] pre, int[] in, int inStart, int inEnd) {
-		//case 1: if inOrder is null
-		if(inStart > inEnd){
+	public TreeNode buildTree(int[] preorder, int[] inorder) {
+		int inStartIdx = 0;
+		int inEndIdx = inorder.length - 1;
+		return buildTreeSub(preorder, inorder, inStartIdx, inEndIdx);
+	}
+
+	public TreeNode buildTreeSub(int[] preorder, int[] inorder, int inStartIdx, int inEndIdx) {
+		// when nothing to check (or empty), return null
+		if (inStartIdx > inEndIdx) {
 			return null;
 		}
-		
-		BSTNode<Integer> node = new BSTNode<Integer>(pre[preIdx++]);
-				
-		//case2: if inOrder has only one element
-		if(inStart == inEnd){
+
+		TreeNode node = new TreeNode(preorder[preIdx++]);
+
+		// when single element, return it
+		if (inStartIdx == inEndIdx) {
 			return node;
 		}
-		
-		//search an element of (preOrder) in inOrder
-		int idx = search(node.data, in, inStart, inEnd);
-		
-		node.left = buildBST(pre, in, inStart, idx-1);
-		node.right = buildBST(pre, in, idx+1, inEnd);
-		
+
+		// search preorder element in inorder[] array
+		int idx = search(node.data, inorder, inStartIdx, inEndIdx);
+		// assign smaller index to left
+		node.left = buildTreeSub(preorder, inorder, inStartIdx, idx - 1);
+		// assign larger index to right
+		node.right = buildTreeSub(preorder, inorder, idx + 1, inEndIdx);
+
 		return node;
 	}
 
-	private int search(int data, int[] in, int inStart, int inEnd) {
-		
-		for (int i = inStart; i < inEnd; i++) {
-			if (data == in[i]) {
-				return i;
+	public int search(int nodeVal, int[] inorder, int inStartIdx, int inEndIdx) {
+		for (int idx = inStartIdx; idx <= inEndIdx; idx++) {
+			if (nodeVal == inorder[idx]) {
+				return idx;
 			}
 		}
 		return 0;
-	}
-	
-	public void inOrderTraversal(BSTNode<Integer> root) {
-		
-		if(root == null) return;
-		
-		inOrderTraversal(root.left);
-		System.out.print(root.data+" ");
-		inOrderTraversal(root.right);
 	}
 }
